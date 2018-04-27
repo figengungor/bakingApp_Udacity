@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
     <string name="app_name">Bake Me</string>
     <string name="time_out">Time out</string>
     <string name="no_internet">No Internet</string>
@@ -6,4 +6,10 @@
     <string name="unexpected_error">Unexpected error</string>
     <string name="server_error">Server error</string>
     <string name="retry">Retry</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="ingredient"><xliff:g id="quantity">%1$s</xliff:g> <xliff:g id="measure">%2$s</xliff:g> <xliff:g id="ingredient">%3$s</xliff:g></string>
+    <string name="steps">Steps</string>
+    <string name="description">Description</string>
+    <string name="stepNo">Step <xliff:g id="stepNumber">%1$d</xliff:g></string>
+    <string name="recipeStepsTitle"><xliff:g id="recipeName">%1$s</xliff:g> Step <xliff:g id="stepNumber">%2$d</xliff:g></string>
 </resources>

@@ -1,4 +1,4 @@
-package com.figengungor.bakingapp_udacity.ui;
+package com.figengungor.bakingapp_udacity.ui.recipes;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;

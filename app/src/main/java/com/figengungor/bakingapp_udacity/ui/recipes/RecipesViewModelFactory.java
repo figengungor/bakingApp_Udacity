@@ -1,8 +1,6 @@
-package com.figengungor.bakingapp_udacity.ui;
+package com.figengungor.bakingapp_udacity.ui.recipes;
 
-import android.arch.lifecycle.ViewModel;
 import android.arch.lifecycle.ViewModelProvider;
-import android.support.annotation.NonNull;
 
 import com.figengungor.bakingapp_udacity.data.DataManager;
 

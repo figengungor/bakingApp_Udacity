@@ -1,12 +1,12 @@
-package com.figengungor.bakingapp_udacity.ui;
+package com.figengungor.bakingapp_udacity.ui.recipes;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,8 +17,11 @@ import android.widget.TextView;
 import com.figengungor.bakingapp_udacity.R;
 import com.figengungor.bakingapp_udacity.data.DataManager;
 import com.figengungor.bakingapp_udacity.data.model.Recipe;
+import com.figengungor.bakingapp_udacity.ui.recipeDetail.RecipeDetailActivity;
 import com.figengungor.bakingapp_udacity.utils.ErrorUtils;
 import com.pnikosis.materialishprogress.ProgressWheel;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -136,6 +139,7 @@ public class RecipesActivity extends AppCompatActivity implements RecipeAdapter.
 
     @Override
     public void onItemClick(Recipe recipe) {
-
+        startActivity(new Intent(this, RecipeDetailActivity.class)
+                .putExtra(RecipeDetailActivity.EXTRA_RECIPE, Parcels.wrap(recipe)));
     }
 }

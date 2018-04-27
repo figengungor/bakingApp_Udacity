@@ -1,4 +1,4 @@
-package com.figengungor.bakingapp_udacity.ui;
+package com.figengungor.bakingapp_udacity.ui.recipes;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

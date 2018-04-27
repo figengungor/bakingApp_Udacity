@@ -57,6 +57,8 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
 
         @BindView(R.id.shortDescriptionTv)
         TextView shortDescriptionTv;
+        @BindView(R.id.stepNoTv)
+        TextView stepNoTv;
 
         public StepViewHolder(View itemView) {
             super(itemView);
@@ -72,15 +74,16 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
         public void bindItem(Step step) {
 
             shortDescriptionTv.setText(step.getShortDescription());
-            if (getAdapterPosition() == selectedStepIndex)
+            stepNoTv.setText(String.valueOf(getAdapterPosition()));
+            if (getAdapterPosition() == selectedStepIndex) {
                 itemView.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.colorAccent));
-            else{
-                itemView.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.white));
+            } else {
+                itemView.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.whiteTrans));
             }
         }
     }
 
-    public void setSelectedStep(int selectedStepIndex){
+    public void setSelectedStep(int selectedStepIndex) {
         this.selectedStepIndex = selectedStepIndex;
         notifyDataSetChanged();
     }

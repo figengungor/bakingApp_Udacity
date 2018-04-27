@@ -3,9 +3,12 @@ package com.figengungor.bakingapp_udacity.ui.stepDetail;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
 import com.figengungor.bakingapp_udacity.R;
 import com.figengungor.bakingapp_udacity.data.model.Step;
+
 import org.parceler.Parcels;
+
 import java.util.List;
 
 public class StepDetailActivity extends AppCompatActivity implements StepDetailFragment.OnInteractionListener {
@@ -26,7 +29,7 @@ public class StepDetailActivity extends AppCompatActivity implements StepDetailF
         int stepIndex = bundle.getInt(EXTRA_STEP_INDEX);
         String recipeName = bundle.getString(EXTRA_RECIPE_NAME);
 
-        getSupportActionBar().setTitle(getString(R.string.recipeStepsTitle, recipeName, stepIndex));
+        getSupportActionBar().setTitle(getString(R.string.recipeStepsTitle, recipeName));
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

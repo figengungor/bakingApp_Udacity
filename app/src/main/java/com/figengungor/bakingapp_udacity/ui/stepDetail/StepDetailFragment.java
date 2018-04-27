@@ -40,8 +40,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static android.view.View.GONE;
-
 /**
  * Created by figengungor on 4/20/2018.
  */
@@ -126,15 +124,15 @@ public class StepDetailFragment extends Fragment {
     }
 
     void displayStepNavigationUI() {
-        stepNoTv.setText(getString(R.string.stepNo, stepIndex + 1));
+        stepNoTv.setText(getString(R.string.stepNo, stepIndex));
         int stepSize = steps.size();
         if (stepIndex == stepSize - 1)
-            nextStepBtn.setVisibility(View.GONE);
+            nextStepBtn.setVisibility(View.INVISIBLE);
         else {
             nextStepBtn.setVisibility(View.VISIBLE);
         }
         if (stepIndex == 0) {
-            previousStepBtn.setVisibility(GONE);
+            previousStepBtn.setVisibility(View.INVISIBLE);
         } else {
             previousStepBtn.setVisibility(View.VISIBLE);
         }

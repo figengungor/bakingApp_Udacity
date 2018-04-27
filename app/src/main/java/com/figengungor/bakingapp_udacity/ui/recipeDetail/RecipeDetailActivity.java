@@ -76,9 +76,9 @@ public class RecipeDetailActivity extends AppCompatActivity implements
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_CODE_STEP_DETAIL){
+        if (requestCode == REQUEST_CODE_STEP_DETAIL) {
             Fragment fragment = fragmentManager.findFragmentById(R.id.stepsContainerFl);
-            ((StepsFragment)fragment).resetStep();
+            ((StepsFragment) fragment).resetStep();
         }
     }
 

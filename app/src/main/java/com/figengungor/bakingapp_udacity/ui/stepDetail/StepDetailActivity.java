@@ -1,15 +1,11 @@
 package com.figengungor.bakingapp_udacity.ui.stepDetail;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
 import com.figengungor.bakingapp_udacity.R;
 import com.figengungor.bakingapp_udacity.data.model.Step;
-
 import org.parceler.Parcels;
-
 import java.util.List;
 
 public class StepDetailActivity extends AppCompatActivity implements StepDetailFragment.OnInteractionListener {

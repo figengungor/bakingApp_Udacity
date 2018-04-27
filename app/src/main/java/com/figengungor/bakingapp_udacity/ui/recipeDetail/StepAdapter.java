@@ -77,8 +77,10 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
             stepNoTv.setText(String.valueOf(getAdapterPosition()));
             if (getAdapterPosition() == selectedStepIndex) {
                 itemView.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.colorAccent));
+                shortDescriptionTv.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.white));
             } else {
                 itemView.setBackgroundColor(ContextCompat.getColor(itemView.getContext(), R.color.whiteTrans));
+                shortDescriptionTv.setTextColor(ContextCompat.getColor(itemView.getContext(), R.color.colorSecondaryText));
             }
         }
     }

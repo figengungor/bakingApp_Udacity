@@ -95,5 +95,6 @@ public class StepsFragment extends Fragment implements StepAdapter.ItemListener 
 
     public void resetStep() {
         adapter.setSelectedStep(-1);
+        selectedStepIndex = -1;
     }
 }

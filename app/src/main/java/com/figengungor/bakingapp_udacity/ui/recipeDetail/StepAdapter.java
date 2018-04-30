@@ -50,7 +50,8 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepViewHolder
 
     @Override
     public int getItemCount() {
-        return steps.size();
+        if (steps.size() > 0) return steps.size();
+        return 0;
     }
 
     class StepViewHolder extends RecyclerView.ViewHolder {

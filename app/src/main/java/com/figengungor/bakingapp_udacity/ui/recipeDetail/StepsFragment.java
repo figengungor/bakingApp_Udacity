@@ -97,4 +97,9 @@ public class StepsFragment extends Fragment implements StepAdapter.ItemListener 
         adapter.setSelectedStep(-1);
         selectedStepIndex = -1;
     }
+
+    public void setSelectedStep(int selectedStepIndex) {
+        adapter.setSelectedStep(selectedStepIndex);
+        this.selectedStepIndex = selectedStepIndex;
+    }
 }

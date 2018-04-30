@@ -84,11 +84,25 @@ public class RecipeDetailActivity extends AppCompatActivity implements
 
     @Override
     public void onPreviousStepClicked(int stepIndex) {
-        //PASS
+        if (isTwoPane) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.stepDetailContainerFl, StepDetailFragment.newInstance(recipe.getSteps(), stepIndex - 1))
+                    .commit();
+
+            Fragment fragment = fragmentManager.findFragmentById(R.id.stepsContainerFl);
+            ((StepsFragment) fragment).setSelectedStep(stepIndex-1);
+        }
     }
 
     @Override
     public void onNextStepClicked(int stepIndex) {
-        //PASS
+        if (isTwoPane) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.stepDetailContainerFl, StepDetailFragment.newInstance(recipe.getSteps(), stepIndex + 1))
+                    .commit();
+
+            Fragment fragment = fragmentManager.findFragmentById(R.id.stepsContainerFl);
+            ((StepsFragment) fragment).setSelectedStep(stepIndex+1);
+        }
     }
 }

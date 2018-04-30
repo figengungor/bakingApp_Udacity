@@ -1,21 +1,28 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#09C"
-    android:padding="@dimen/widget_margin">
+    android:background="@drawable/food_repeating"
+    android:padding="@dimen/widget_margin"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/appwidget_text"
+        android:id="@+id/recipeNameTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:layout_margin="8dp"
-        android:background="#09C"
+        android:background="@color/colorAccent"
         android:contentDescription="@string/appwidget_text"
         android:text="@string/appwidget_text"
-        android:textColor="#ffffff"
+        android:textColor="@color/white"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:textSize="24sp"
         android:textStyle="bold|italic" />
+    
+    <ListView
+        android:id="@+id/ingredientsLv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
-</RelativeLayout>
+</LinearLayout>

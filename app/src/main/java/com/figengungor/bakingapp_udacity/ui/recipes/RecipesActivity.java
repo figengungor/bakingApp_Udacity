@@ -4,8 +4,11 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.constraint.ConstraintLayout;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.figengungor.bakingapp_udacity.R;
+import com.figengungor.bakingapp_udacity.SimpleIdlingResource;
 import com.figengungor.bakingapp_udacity.data.DataManager;
 import com.figengungor.bakingapp_udacity.data.model.Recipe;
 import com.figengungor.bakingapp_udacity.ui.recipeDetail.RecipeDetailActivity;
@@ -54,6 +58,22 @@ public class RecipesActivity extends AppCompatActivity implements RecipeAdapter.
 
     RecipesViewModel viewModel;
 
+    // The Idling Resource which will be null in production.
+    @Nullable
+    private SimpleIdlingResource mIdlingResource;
+
+    /**
+     * Only called from test, creates and returns a new {@link SimpleIdlingResource}.
+     */
+    @VisibleForTesting
+    @NonNull
+    public IdlingResource getIdlingResource() {
+        if (mIdlingResource == null) {
+            mIdlingResource = new SimpleIdlingResource();
+        }
+        return mIdlingResource;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,14 +83,25 @@ public class RecipesActivity extends AppCompatActivity implements RecipeAdapter.
     }
 
     private void init() {
+
+        getIdlingResource();
+
+        if (mIdlingResource != null) {
+            mIdlingResource.setIdleState(false);
+        }
+
         viewModel = ViewModelProviders.of(this, new RecipesViewModelFactory(DataManager.getInstance()))
                 .get(RecipesViewModel.class);
 
         viewModel.getRecipesLiveData().observe(this, new Observer<List<Recipe>>() {
             @Override
             public void onChanged(@Nullable List<Recipe> recipes) {
-                if (recipes != null) showRecipes(recipes);
-                else recipeRv.setVisibility(View.GONE);
+                if (recipes != null) {
+                    showRecipes(recipes);
+                    if (mIdlingResource != null) {
+                        mIdlingResource.setIdleState(true);
+                    }
+                } else recipeRv.setVisibility(View.GONE);
             }
         });
 
@@ -86,8 +117,12 @@ public class RecipesActivity extends AppCompatActivity implements RecipeAdapter.
             @Override
             public void onChanged(@Nullable Throwable throwable) {
                 Log.d(TAG, "onChanged: getError -> " + throwable);
-                if (throwable != null) showError(throwable);
-                else messageLayout.setVisibility(View.GONE);
+                if (throwable != null) {
+                    showError(throwable);
+                    if (mIdlingResource != null) {
+                        mIdlingResource.setIdleState(true);
+                    }
+                } else messageLayout.setVisibility(View.GONE);
 
             }
         });

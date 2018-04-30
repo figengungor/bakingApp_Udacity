@@ -5,16 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
 
-import com.figengungor.bakingapp_udacity.R;
 import com.figengungor.bakingapp_udacity.data.model.Recipe;
-import com.figengungor.bakingapp_udacity.ui.recipeDetail.RecipeDetailActivity;
 import com.figengungor.bakingapp_udacity.ui.recipes.RecipesActivity;
 import com.google.gson.Gson;
-
-import org.parceler.Parcels;
 
 /**
  * The configuration screen for the {@link BakingWidgetProvider BakingWidgetProvider} AppWidget.

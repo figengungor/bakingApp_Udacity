@@ -73,6 +73,9 @@ dependencies {
     //Espresso Idling Resource
     implementation "com.android.support.test.espresso:espresso-idling-resource:$espressoVersion"
 
+    //Stetho
+    implementation "com.facebook.stetho:stetho:$stethoVersion"
+
     //Test
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'

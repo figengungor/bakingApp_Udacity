@@ -46,6 +46,8 @@ import butterknife.OnClick;
  * Created by figengungor on 4/20/2018.
  */
 
+//https://github.com/yusufcakmak/ExoPlayerSample
+
 public class StepDetailFragment extends Fragment {
 
     @BindView(R.id.playerView)

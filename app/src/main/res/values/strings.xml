@@ -14,4 +14,5 @@
     <string name="recipeStepsTitle"><xliff:g id="recipeName">%1$s</xliff:g> Steps</string>
     <string name="appwidget_text">INGREDIENTS ARE COMING&#8230;</string>
     <string name="recipe_not_exist">No recipe found!</string>
+    <string name="servings"><xliff:g id="servings">%1$d</xliff:g> Servings</string>
 </resources>

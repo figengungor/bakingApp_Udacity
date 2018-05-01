@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.figengungor.bakingapp_udacity.R;
 import com.figengungor.bakingapp_udacity.data.model.Recipe;
 
+import net.wujingchao.android.view.SimpleTagImageView;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -55,6 +57,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         @BindView(R.id.recipeNameTv)
         TextView recipeNameTv;
+        @BindView(R.id.simpleTagIv)
+        SimpleTagImageView simpleTagIv;
 
         @OnClick(R.id.recipeContainerCv)
         public void onItemClicked() {
@@ -68,6 +72,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         public void bindItem(Recipe recipe) {
             recipeNameTv.setText(recipe.getName());
+            simpleTagIv.setTagText(itemView.getContext().getString(R.string.servings, recipe.getServings()));
         }
     }
 }

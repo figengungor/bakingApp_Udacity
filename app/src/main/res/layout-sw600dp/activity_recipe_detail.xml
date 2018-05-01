@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="3"
+    android:weightSum="5"
     android:orientation="horizontal">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:id="@+id/nestedScrollView"
         tools:context="com.figengungor.bakingapp_udacity.ui.recipeDetail.RecipeDetailActivity">
 
@@ -35,6 +35,6 @@
         android:id="@+id/stepDetailContainerFl"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"/>
+        android:layout_weight="3"/>
 
 </LinearLayout>

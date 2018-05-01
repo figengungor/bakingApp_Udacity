@@ -2,6 +2,7 @@ package com.figengungor.bakingapp_udacity.ui.recipes;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.figengungor.bakingapp_udacity.R;
 import com.figengungor.bakingapp_udacity.data.model.Recipe;
+import com.squareup.picasso.Picasso;
 
 import net.wujingchao.android.view.SimpleTagImageView;
 
@@ -73,6 +75,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         public void bindItem(Recipe recipe) {
             recipeNameTv.setText(recipe.getName());
             simpleTagIv.setTagText(itemView.getContext().getString(R.string.servings, recipe.getServings()));
+            if (!TextUtils.isEmpty(recipe.getImage()))
+                Picasso.with(itemView.getContext()).load(recipe.getImage())
+                        .placeholder(R.drawable.food_repeating)
+                        .error(R.drawable.food_repeating)
+                        .into(simpleTagIv);
         }
     }
 }

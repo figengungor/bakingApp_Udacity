@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.figengungor.bakingapp_udacity.R;
 import com.figengungor.bakingapp_udacity.data.model.Step;
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
@@ -48,7 +50,7 @@ import butterknife.OnClick;
 
 //https://github.com/yusufcakmak/ExoPlayerSample
 
-public class StepDetailFragment extends Fragment {
+public class StepDetailFragment extends Fragment{
 
     @BindView(R.id.playerView)
     SimpleExoPlayerView playerView;
@@ -81,19 +83,22 @@ public class StepDetailFragment extends Fragment {
         callback.onNextStepClicked(stepIndex);
     }
 
-
+    private static final String TAG = StepDetailFragment.class.getSimpleName();
     private static final String ARG_STEPS = "steps";
     private static final String ARG_STEP_INDEX = "step_index";
     List<Step> steps;
     int stepIndex;
     Step step;
 
+    private static final String RESUME_POSITION = "resume_position";
+    private static final String SHOULD_PLAY = "should_play";
     private SimpleExoPlayer player;
     private DataSource.Factory mediaDataSourceFactory;
     private DefaultTrackSelector trackSelector;
-    private boolean shouldAutoPlay;
     private BandwidthMeter bandwidthMeter;
     private OnInteractionListener callback;
+    private long resumePosition = C.TIME_UNSET;
+    private boolean shouldAutoPlay = true;
 
     public interface OnInteractionListener {
         void onPreviousStepClicked(int stepIndex);
@@ -109,9 +114,12 @@ public class StepDetailFragment extends Fragment {
         stepIndex = getArguments().getInt(ARG_STEP_INDEX);
         step = steps.get(stepIndex);
         if (!TextUtils.isEmpty(step.getVideoURL())) {
-            shouldAutoPlay = true;
             bandwidthMeter = new DefaultBandwidthMeter();
             mediaDataSourceFactory = new DefaultDataSourceFactory(getContext(), Util.getUserAgent(getContext(), "BakeMe"), (TransferListener<? super DataSource>) bandwidthMeter);
+        }
+        if (savedInstanceState != null) {
+            resumePosition = savedInstanceState.getLong(RESUME_POSITION);
+            shouldAutoPlay = savedInstanceState.getBoolean(SHOULD_PLAY);
         }
     }
 
@@ -182,19 +190,22 @@ public class StepDetailFragment extends Fragment {
 
         playerView.setPlayer(player);
 
-        player.setPlayWhenReady(shouldAutoPlay);
-
         DefaultExtractorsFactory extractorsFactory = new DefaultExtractorsFactory();
 
         MediaSource mediaSource = new ExtractorMediaSource(Uri.parse(step.getVideoURL()),
                 mediaDataSourceFactory, extractorsFactory, null, null);
 
         player.prepare(mediaSource);
+
+        player.setPlayWhenReady(shouldAutoPlay);
+
+        if (resumePosition != C.TIME_UNSET) player.seekTo(resumePosition);
+
     }
 
     private void releasePlayer() {
         if (player != null) {
-            shouldAutoPlay = player.getPlayWhenReady();
+            Log.d(TAG, "releasePlayer: "+ resumePosition);
             player.release();
             player = null;
             trackSelector = null;
@@ -234,6 +245,8 @@ public class StepDetailFragment extends Fragment {
     public void onPause() {
         super.onPause();
         if (!TextUtils.isEmpty(step.getVideoURL())) {
+            shouldAutoPlay = player.getPlayWhenReady();
+            resumePosition = player.getCurrentPosition();
             if (Util.SDK_INT <= 23) {
                 releasePlayer();
             }
@@ -260,4 +273,12 @@ public class StepDetailFragment extends Fragment {
                     + "must implement OnInteractionListener");
         }
     }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putLong(RESUME_POSITION, resumePosition);
+        Log.d(TAG, "onSaveInstanceState: " + resumePosition);
+        outState.putBoolean(SHOULD_PLAY, shouldAutoPlay);
+    }
+
 }

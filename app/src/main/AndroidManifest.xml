@@ -27,7 +27,6 @@
             android:parentActivityName=".ui.recipes.RecipesActivity" />
         <activity
             android:name=".ui.stepDetail.StepDetailActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
             android:parentActivityName=".ui.recipeDetail.RecipeDetailActivity" />
 
         <receiver android:name=".widget.BakingWidgetProvider">
